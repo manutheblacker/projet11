@@ -91,9 +91,8 @@ public:
 
     void continuer(){
         cout << "Aimeriez-vous continuer? Oui(y) ou Non(n)" <<endl;
-        bool choix;
+        char choix;
         cin >> choix;
-        choix = "n";
         while(choix){
             inscription();
             break;
@@ -102,24 +101,28 @@ public:
 
      void inscription(){
         cout << "Veuillez chosir ce que vous aimerez faire : " <<endl;
-        cout << "1 - Ajouter un nouvel étudiant  " <<endl;
-        cout << "2 - Ajouter les notes pour l'étudiant  " <<endl;
-        cout << "3 - Obtenir la moyenne de l'étudiant  " <<endl;
-        cout << "4 - Obtenir l'admissibilité de l'étudiant  " <<endl;
-         cout << "5 - Voir s'il est exae_quo  " <<endl;
-        int choix;
+        cout << "1 - Ajouter un nouvel étudiant.  " <<endl;
+        cout << "2 - Ajouter les notes pour l'étudiant.  " <<endl;
+        cout << "3 - Obtenir la moyenne de l'étudiant.  " <<endl;
+        cout << "4 - Obtenir l'admissibilité de l'étudiant.  " <<endl;
+         cout << "5 - Quitter le programme.   " <<endl;
+
+         int choix;
         cin >> choix;
         switch (choix) {
             case 1:
                 this->ajouterEtudiant();
+                this->continuer();
                 break;
 
             case 2:
                 this->ajouterNotes();
+                this->continuer();
                 break;
 
             case 3:
                 cout  << " La moyenne de l'étudiant est : " << this->calculateMoyenne() << endl;
+                this->continuer();
                 break;
 
             case 4:
@@ -128,31 +131,25 @@ public:
                 }else{
                     cout << "L'etudiant a échouée."<<endl;
                 }
+                this->continuer();
                 break;
 
             case 5:
-                break;
-
             default:
                 cout << "Veuillez choisir une valeur comprise entre 1 et 4." <<endl;
+                this->continuer();
                 break;
         }
+
     }
+
+
 
 
 private:
     string noms;
     string prenoms;
     double tabnotes[10];
-
-    double calculateMoyenne(){
-        double * notes = this->getNotes();
-        double tmp_notes_sum;
-        for(int i=0; i <= 10 ; i++){
-            tmp_notes_sum += notes[i];
-        }
-        return tmp_notes_sum / 10;
-    }
 
     void ajouterEtudiant(){
         string etudiant_name, etudiant_prenoms;
@@ -177,6 +174,15 @@ private:
         }
     }
 
+protected:
+    double calculateMoyenne(){
+        double * notes = this->getNotes();
+        double tmp_notes_sum;
+        for(int i=0; i <= 10 ; i++){
+            tmp_notes_sum += notes[i];
+        }
+        return tmp_notes_sum / 10;
+    }
 };
 
 
